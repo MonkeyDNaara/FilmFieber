@@ -17,3 +17,5 @@ const saveData = (data) => {
     console.error("Error saving to localStorage:", error);
   }
 };
+
+export { getData, saveData };
