@@ -1,1 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+
 @import "tailwindcss";
+
+@theme {
+  --color-brand-dark: #b91c1c;
+  --color-brand-dark-hover: #991b1b;
+  --color-brand-purple: #7c3aed;
+  --color-brand-purple-hover: #6d28d9;
+  --color-brand-accent: #84cc16;
+  --color-glass-border: rgba(255, 255, 255, 0.12);
+  --color-glass-surface: rgba(10, 10, 10, 0.7);
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+@layer base {
+  html, body {
+    @apply bg-neutral-950 text-white antialiased font-body;
+    min-height: 100vh;
+  }
+  body {
+    background: radial-gradient(circle at 20% 10%, #350808 0%, #000000 50%) no-repeat border-box;
+  }
+}
