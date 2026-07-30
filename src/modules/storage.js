@@ -18,4 +18,10 @@ const saveData = (data) => {
   }
 };
 
-export { getData, saveData };
+const addItemToStorage = (item) => {
+  const data = getData();
+  data.push(item);
+  saveData(data);
+};
+
+export { getData, saveData, addItemToStorage };
