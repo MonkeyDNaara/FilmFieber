@@ -1,8 +1,11 @@
 import { BASE_IMG_URL, IMG_SIZE } from "./config";
+import {
+  addItemToStorage,
+  isItemInStorage,
+  removeItemFromStorage,
+} from "./storage";
 
-const createCard = (item) => {
-  const app = document.getElementById("app");
-
+const createCard = (item, target) => {
   const card = document.createElement("div");
   card.className = "w-100 border flex";
 
@@ -16,6 +19,26 @@ const createCard = (item) => {
   const btnStar = document.createElement("button");
   btnStar.className = "w-8 h-8 border flex items-center justify-center text-sm";
   btnStar.textContent = "★";
+
+  const handleFavorite = (event) => {
+    if (isItemInStorage(item.id)) {
+      removeItemFromStorage(item.id);
+      btnStar.classList.remove("bg-red-500");
+      btnStar.classList.add("bg-green-500");
+    } else {
+      addItemToStorage(item);
+      btnStar.classList.remove("bg-green-500");
+      btnStar.classList.add("bg-red-500");
+    }
+  };
+
+  if (isItemInStorage(item.id)) {
+    btnStar.classList.add("bg-red-500");
+  } else {
+    btnStar.classList.add("bg-green-500");
+  }
+
+  btnStar.addEventListener("click", handleFavorite);
 
   btnContainer.appendChild(btnN);
   btnContainer.appendChild(btnStar);
@@ -46,7 +69,7 @@ const createCard = (item) => {
   card.appendChild(imgContainer);
   card.appendChild(content);
 
-  app.appendChild(card);
+  target.appendChild(card);
 };
 
 export { createCard };
