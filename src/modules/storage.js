@@ -30,4 +30,20 @@ const removeItemFromStorage = (id) => {
   saveData(updatedData);
 };
 
-export { getData, saveData, addItemToStorage, removeItemFromStorage };
+const addNoteToItem = (id, note) => {
+  const data = getData();
+  const index = data.findIndex((item) => item.id === id);
+
+  if (index !== -1) {
+    data[index].note = note;
+    saveData(data);
+  }
+};
+
+export {
+  getData,
+  saveData,
+  addItemToStorage,
+  removeItemFromStorage,
+  addNoteToItem,
+};
