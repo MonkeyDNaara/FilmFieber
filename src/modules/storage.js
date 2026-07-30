@@ -40,10 +40,15 @@ const addNoteToItem = (id, note) => {
   }
 };
 
+const isItemInStorage = (id) => {
+  return getData().some((item) => item.id === id);
+};
+
 export {
   getData,
   saveData,
   addItemToStorage,
   removeItemFromStorage,
   addNoteToItem,
+  isItemInStorage,
 };
