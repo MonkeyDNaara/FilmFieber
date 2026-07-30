@@ -25,7 +25,7 @@ export default (app) => {
   header.className = 'sticky top-0 z-20 border-b border-white/10 bg-neutral-950/80 backdrop-blur';
   header.innerHTML = `
     <div class="mx-auto max-w-6xl flex items-center justify-between gap-4 px-4 py-3">
-      <a href="index.html" class="text-lg font-bold text-white">🎬 FilmFieber<span class="text-[#b6ff3b]">.</span></a>
+      <a href="index.html" class="text-lg font-bold text-white">🌡️ 🎬 FilmFieber<span class="text-[#b6ff3b]">.</span></a>
       <button id="new-entry" class="shrink-0 rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-black hover:bg-neutral-200">Neu</button>
     </div>
   `;
