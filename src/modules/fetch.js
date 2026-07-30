@@ -1,0 +1,26 @@
+import { API_URL, API_TOKEN, API_KEY, LANGUAGE } from "./config.js";
+
+const options = {
+  method: "GET",
+  headers: { accept: "application/json", Authorization: `Bearer ${API_TOKEN}` },
+};
+
+const fetchMovies = async (page) => {
+  try {
+    const response = await fetch(
+      `${API_URL}?language=${LANGUAGE}&page=${page}`,
+      options,
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Fehler bei laden von Seite ${page}. Status: ${response.status}`,
+      );
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error(error.message);
+    return;
+  }
+};
