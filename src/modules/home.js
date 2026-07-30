@@ -16,7 +16,7 @@ export default async (app) => {
   header.innerHTML = `
     <div class="mx-auto max-w-6xl flex items-center justify-between gap-4 px-4 py-3">
       <a href="#" class="text-lg font-bold text-white">
-        🌡️ 🎬 FilmFieber<span class="text-[#b6ff3b]">.</span>
+        🌡️ FilmFieber<span class="text-[#f5d061]">.</span>
       </a>
       <div class="flex items-center gap-2">
         <a class="nav-link cursor-auto rounded-lg px-3 py-1.5 text-xs font-semibold text-white ring-1 ring-white/20 hover:bg-white/10" data-page="home">Start</a>
@@ -30,12 +30,12 @@ export default async (app) => {
   const hero = document.createElement('section');
   hero.className = 'relative overflow-hidden border-b border-white/10';
   hero.innerHTML = `
-    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_#7b1e2b30_0%,_#0a0a0a60_50%,_#000_100%)] mix-blend-screen"></div>
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_#7c3aed30_0%,_#0a0a0a60_50%,_#000_100%)] mix-blend-screen"></div>
     <div class="relative mx-auto max-w-6xl px-4 py-10 md:py-14">
       <div class="max-w-2xl">
         <h1 class="text-4xl font-black tracking-tight text-white md:text-5xl leading-[0.95]">
           Entdecke Filme.
-          <span class="block text-[#b6ff3b] mix-blend-difference">Nichts übersehen.</span>
+          <span class="block text-[#f5d061] mix-blend-difference">Nichts übersehen.</span>
         </h1>
         <p class="mt-3 text-base text-neutral-300 leading-relaxed">Suche, entdecke und behalte deine Favoriten im Blick.</p>
       </div>
@@ -43,8 +43,8 @@ export default async (app) => {
         <label class="sr-only" for="search">Filmsuche</label>
         <div class="flex gap-2">
           <input id="search" type="search" autocomplete="off" placeholder="Suche Titel, Genre oder Jahr…"
-            class="flex-1 rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-neutral-500 ring-1 ring-white/10 transition placeholder:text-neutral-500 focus:border-[#6d28d9] focus:ring-[#6d28d9]/60" />
-          <button data-clear class="hidden rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white ring-1 ring-white/10 hover:bg-white/10">✕</button>
+            class="flex-1 rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-neutral-500 ring-1 ring-white/10 transition placeholder:text-neutral-500 focus:border-[#7c3aed] focus:ring-[#7c3aed]/60" />
+          <button data-clear class="hidden rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white ring-1 ring-[#7c3aed]/40 hover:bg-[#7c3aed]/40 hover:text-white">✕</button>
         </div>
         <div id="suggestions" class="mt-2 space-y-1"></div>
       </div>
@@ -74,7 +74,7 @@ export default async (app) => {
   loader.className = 'fixed inset-x-0 bottom-6 flex justify-center';
   loader.innerHTML = `
     <div id="live-indicator" class="hidden items-center gap-2 rounded-full bg-black/60 px-3 py-1.5 text-[11px] text-neutral-300 ring-1 ring-white/10 backdrop-blur">
-      <span class="h-1.5 w-1.5 rounded-full bg-[#b6ff3b] animate-pulse" aria-hidden="true" />
+      <span class="h-1.5 w-1.5 rounded-full bg-[#f5d061] animate-pulse" aria-hidden="true" />
       Aktualisiere…
     </div>
   `;
@@ -92,7 +92,7 @@ export default async (app) => {
   const renderItem = (film) => {
     const active = state.selectedId === film.id;
     return `
-      <article data-id="${film.id}" class="film-card group cursor-pointer rounded-xl border border-white/10 bg-white/[0.03] transition duration-200 hover:-translate-y-1 hover:border-[#6d28d9]/50 hover:shadow-[0_1.2rem_2.4rem_rgba(109,40,217,0.18)] ${active ? 'ring-1 ring-[#6d28d9]' : ''}">
+      <article data-id="${film.id}" class="film-card group cursor-pointer rounded-xl border border-white/10 bg-white/[0.03] transition duration-200 hover:-translate-y-1 hover:border-[#7c3aed]/50 hover:shadow-[0_1.2rem_2.4rem_rgba(124,58,237,0.18)] ${active ? 'ring-1 ring-[#7c3aed]' : ''}">
         <div class="relative aspect-[2/3] overflow-hidden rounded-t-xl bg-black/40">
           <img src="${esc(film.poster || 'public/icons.svg')}" alt="${esc(film.title)}" loading="lazy" class="h-full w-full object-cover mix-blend-luminosity transition duration-500 group-hover:scale-105" />
           <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-black/0 p-2">
@@ -102,7 +102,7 @@ export default async (app) => {
         <div class="space-y-1 p-3">
           <p class="text-sm font-semibold leading-tight text-white">${esc(film.title)}</p>
           <p class="text-xs text-neutral-400">${(film.genres || []).join(', ') || 'Ohne Genre'}</p>
-          <div class="flex items-center gap-1 text-[11px] font-semibold text-[#b6ff3b]">
+          <div class="flex items-center gap-1 text-[11px] font-semibold text-[#f5d061]">
             <span aria-hidden="true">★</span>
             <span>${esc(film.rating)}</span>
           </div>
@@ -151,7 +151,7 @@ export default async (app) => {
     sheet.innerHTML = `
       <div class="mx-auto max-w-4xl rounded-t-2xl border border-white/10 bg-neutral-950 px-5 py-6 shadow-2xl backdrop-blur">
         <div class="flex gap-4">
-          <img src="${esc(film.poster || 'public/icons.svg')}" alt="${esc(film.title)}" class="hidden h-36 w-24 rounded-xl object-cover shadow-[0_1.2rem_2rem_rgba(0,0,0,0.5)] md:block ring-1 ring-white/10" />
+          <img src="${esc(film.poster || 'public/icons.svg')}" alt="${esc(film.title)}" class="hidden h-36 w-24 rounded-xl object-cover shadow-[0_1.2rem_2rem_rgba(124,58,237,0.35)] md:block ring-1 ring-[#7c3aed]/60" />
           <div class="flex-1">
             <div class="flex items-start justify-between">
               <div>
@@ -162,9 +162,9 @@ export default async (app) => {
             </div>
             <p class="mt-2 text-sm text-neutral-300">${esc(film.overview || 'Keine Beschreibung.')}</p>
             <div class="mt-3 flex items-center gap-2">
-              <span class="rounded-md bg-white/5 px-2 py-1 text-[11px] text-white ring-1 ring-white/10 transition duration-200 hover:border-[#b6ff3b] hover:text-[#b6ff3b]">⭐ ${esc(film.rating)}</span>
+              <span class="rounded-md bg-white/5 px-2 py-1 text-[11px] text-white ring-1 ring-white/10 transition duration-200 hover:border-[#f5d061] hover:text-[#f5d061]">⭐ ${esc(film.rating)}</span>
               <span class="rounded-md bg-white/5 px-2 py-1 text-[11px] text-neutral-300 ring-1 ring-white/10">ID ${film.id}</span>
-              <button data-action="journal" data-id="${film.id}" class="ml-auto rounded-md bg-[#7b1e2b] px-3 py-1.5 text-xs font-semibold text-white ring-1 ring-[#7b1e2b] transition hover:bg-[#5e1622]">Zu Journal</button>
+              <button data-action="journal" data-id="${film.id}" class="ml-auto rounded-md bg-[#7c3aed] px-3 py-1.5 text-xs font-semibold text-white ring-1 ring-[#7c3aed] transition hover:bg-[#6d28d9]">Zu Journal</button>
             </div>
           </div>
         </div>
@@ -179,7 +179,7 @@ export default async (app) => {
       live.scrollIntoView({ behavior: 'smooth' });
     }
     const journalBtn = sheet.querySelector('button[data-action="journal"]');
-    journalBtn.addEventListener('click', async () => {
+    journalBtn.addEventListener('click', () => {
       sheet.remove();
       if (live) { live.classList.add('hidden'); live.classList.remove('flex'); }
       location.hash = '#/journal';

@@ -25,7 +25,7 @@ export default (app) => {
   header.className = 'sticky top-0 z-20 border-b border-white/10 bg-neutral-950/80 backdrop-blur';
   header.innerHTML = `
     <div class="mx-auto max-w-6xl flex items-center justify-between gap-4 px-4 py-3">
-      <a href="index.html" class="text-lg font-bold text-white">🌡️ 🎬 FilmFieber<span class="text-[#b6ff3b]">.</span></a>
+      <a href="index.html" class="text-lg font-bold text-white">🌡️ FilmFieber<span class="text-[#f5d061]">.</span></a>
       <button id="new-entry" class="shrink-0 rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-black hover:bg-neutral-200">Neu</button>
     </div>
   `;
@@ -66,7 +66,7 @@ export default (app) => {
         </div>
         <div class="flex flex-col gap-1">
           <button data-action="edit" data-idx="${idx}" class="rounded-md px-2 py-1 text-[11px] text-neutral-300 ring-1 ring-white/10 hover:bg-white/10">Bearbeiten</button>
-          <button data-action="remove" data-idx="${idx}" class="rounded-md px-2 py-1 text-[11px] text-[#7b1e2b] ring-1 ring-[#7b1e2b]/60 hover:bg-[#7b1e2b] hover:text-white">Löschen</button>
+          <button data-action="remove" data-idx="${idx}" class="rounded-md px-2 py-1 text-[11px] text-white ring-1 ring-[#7c3aed]/70 hover:bg-[#7c3aed] hover:text-white">Löschen</button>
         </div>
       </article>
     `).join('');
@@ -87,10 +87,10 @@ export default (app) => {
       <form id="entry-form" class="w-full max-w-lg rounded-2xl border border-white/10 bg-neutral-950 p-5 shadow-2xl">
         <h3 class="text-base font-bold text-white">${isEdit ? 'Eintrag bearbeiten' : 'Neuer Eintrag'}</h3>
         <div class="mt-4 space-y-3">
-          <input id="ef-title" value="${isEdit ? entry.title : ''}" placeholder="Titel" class="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-neutral-500 ring-1 ring-white/10 focus:border-[#6d28d9] focus:ring-[#6d28d9]/60" />
-          <input id="ef-rating" value="${isEdit ? entry.rating ?? '' : ''}" placeholder="Bewertung (1–10)" inputmode="numeric" class="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-neutral-500 ring-1 ring-white/10 focus:border-[#6d28d9] focus:ring-[#6d28d9]/60" />
-          <textarea id="ef-note" rows="3" placeholder="Notiz…" class="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-neutral-500 ring-1 ring-white/10 focus:border-[#6d28d9] focus:ring-[#6d28d9]/60">${isEdit ? entry.note ?? '' : ''}</textarea>
-          <select id="ef-mood" class="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white ring-1 ring-white/10 focus:border-[#6d28d9] focus:ring-[#6d28d9]/60">
+          <input id="ef-title" value="${isEdit ? entry.title : ''}" placeholder="Titel" class="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-neutral-500 ring-1 ring-white/10 focus:border-[#7c3aed] focus:ring-[#7c3aed]/60" />
+          <input id="ef-rating" value="${isEdit ? entry.rating ?? '' : ''}" placeholder="Bewertung (1–10)" inputmode="numeric" class="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-neutral-500 ring-1 ring-white/10 focus:border-[#7c3aed] focus:ring-[#7c3aed]/60" />
+          <textarea id="ef-note" rows="3" placeholder="Notiz…" class="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-neutral-500 ring-1 ring-white/10 focus:border-[#7c3aed] focus:ring-[#7c3aed]/60">${isEdit ? entry.note ?? '' : ''}</textarea>
+          <select id="ef-mood" class="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white ring-1 ring-white/10 focus:border-[#7c3aed] focus:ring-[#7c3aed]/60">
             <option value="" ${!isEdit || !entry.mood ? 'selected' : ''}>Stimmung (optional)</option>
             <option value="Positiv" ${isEdit && entry.mood === 'Positiv' ? 'selected' : ''}>Positiv</option>
             <option value="Neutral" ${isEdit && entry.mood === 'Neutral' ? 'selected' : ''}>Neutral</option>
@@ -99,7 +99,7 @@ export default (app) => {
         </div>
         <div class="mt-5 flex justify-end gap-2">
           <button type="button" id="close-form" class="rounded-lg px-3 py-1.5 text-xs text-neutral-300 ring-1 ring-white/10 hover:bg-white/10">Abbrechen</button>
-          <button type="submit" class="rounded-lg bg-[#6d28d9] px-3 py-1.5 text-xs font-semibold text-white ring-1 ring-[#6d28d9] transition hover:bg-[#4c1d95]">Speichern</button>
+          <button type="submit" class="rounded-lg bg-[#7c3aed] px-3 py-1.5 text-xs font-semibold text-white ring-1 ring-[#7c3aed] transition hover:bg-[#6d28d9]">Speichern</button>
         </div>
       </form>
     `;

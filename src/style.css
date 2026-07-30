@@ -3,11 +3,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-dark: #b91c1c;
-  --color-brand-dark-hover: #991b1b;
-  --color-brand-purple: #7c3aed;
-  --color-brand-purple-hover: #6d28d9;
-  --color-brand-accent: #84cc16;
+  --color-brand-dark: #7c3aed;
+  --color-brand-dark-hover: #6d28d9;
+  --color-brand-purple: #4c1d95;
+  --color-brand-purple-hover: #3b1578;
+  --color-brand-accent: #f5d061;
   --color-glass-border: rgba(255, 255, 255, 0.12);
   --color-glass-surface: rgba(10, 10, 10, 0.7);
   --font-display: 'Bebas Neue', sans-serif;
@@ -20,6 +20,6 @@
     min-height: 100vh;
   }
   body {
-    background: radial-gradient(circle at 20% 10%, #350808 0%, #000000 50%) no-repeat border-box;
+  background: radial-gradient(circle at 20% 10%, #1f0a3d 0%, #000000 50%) no-repeat border-box;
   }
 }
