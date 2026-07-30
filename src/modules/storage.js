@@ -24,4 +24,10 @@ const addItemToStorage = (item) => {
   saveData(data);
 };
 
-export { getData, saveData, addItemToStorage };
+const removeItemFromStorage = (id) => {
+  const data = getData();
+  const updatedData = data.filter((item) => item.id !== id);
+  saveData(updatedData);
+};
+
+export { getData, saveData, addItemToStorage, removeItemFromStorage };
