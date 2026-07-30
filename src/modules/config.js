@@ -1,1 +1,6 @@
-URL = "https://api.themoviedb.org/";
+const API_URL = "https://api.themoviedb.org/3/movie/popular";
+const API_TOKEN = import.meta.env.VITE_TMDB_TOKEN;
+const API_KEY = import.meta.env.VITE_TMDB_KEY;
+const LANGUAGE = "en-US";
+
+export { API_URL, API_TOKEN, API_KEY, LANGUAGE };
