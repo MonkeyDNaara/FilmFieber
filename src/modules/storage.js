@@ -1,4 +1,4 @@
-const STORAGE_KEY = "journal";
+import { STORAGE_KEY } from "./config";
 
 const getData = () => {
   try {
