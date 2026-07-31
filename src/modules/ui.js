@@ -3,6 +3,8 @@ import {
   addItemToStorage,
   isItemInStorage,
   removeItemFromStorage,
+  addNoteToItem,
+  getData,
 } from "./storage";
 
 const handleFavorite = (event, item) => {
@@ -25,6 +27,12 @@ const showNotes = (event, container) => {
   } else {
     container.classList.add("hidden");
   }
+};
+
+const saveNotes = (event, item, text) => {
+  event.preventDefault();
+  // addItemToStorage(item);
+  addNoteToItem(item.id, text);
 };
 
 const createCard = (item, target) => {
@@ -94,6 +102,7 @@ const createCard = (item, target) => {
   const notesText = document.createElement("textarea");
   notesText.rows = "3";
   notesText.className = "border text-sm w-full";
+  notesText.textContent = item.note ? item.note : "";
 
   content.appendChild(btnContainer);
   content.appendChild(titel);
@@ -113,6 +122,9 @@ const createCard = (item, target) => {
 
   btnN.addEventListener("click", (event) => {
     showNotes(event, form);
+  });
+  notesBtn.addEventListener("click", (event) => {
+    saveNotes(event, item, notesText.value);
   });
 };
 
