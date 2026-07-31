@@ -18,49 +18,12 @@ const handleFavorite = (event, item) => {
   }
 };
 
-let notesVisible = false;
-
-const createNotes = (container) => {
-  // const content = document.querySelector("#content");
-
-  const form = document.createElement("form");
-
-  const notesContainer = document.createElement("div");
-  notesContainer.className = "px-2 m-2";
-
-  const notesHeader = document.createElement("div");
-  notesHeader.className = "flex justify-between py-2 my-2";
-
-  const notesLabel = document.createElement("Label");
-  notesLabel.textContent = "Notes";
-  notesLabel.className = "block text-md font-bold";
-
-  const notesBtn = document.createElement("button");
-  notesBtn.className =
-    "w-20 h-8 border flex items-center justify-center text-sm";
-  notesBtn.textContent = "Save";
-
-  const notesText = document.createElement("textarea");
-  notesText.rows = "3";
-  notesText.className = "border text-sm w-full";
-
-  container.appendChild(form);
-  form.appendChild(notesContainer);
-  notesContainer.appendChild(notesHeader);
-  notesHeader.appendChild(notesLabel);
-  notesHeader.appendChild(notesBtn);
-  notesContainer.appendChild(notesText);
-};
-
 const showNotes = (event, container) => {
   event.preventDefault();
-  if (!notesVisible) {
-    notesVisible = true;
-    createNotes(container);
+  if (container.classList.contains("hidden")) {
+    container.classList.remove("hidden");
   } else {
-    const notes = document.querySelector("form");
-    notes.remove();
-    notesVisible = false;
+    container.classList.add("hidden");
   }
 };
 
@@ -110,6 +73,28 @@ const createCard = (item, target) => {
   beschreibung.className = "border px-2 text-sm";
   beschreibung.textContent = item.overview;
 
+  const form = document.createElement("form");
+  form.className = "hidden";
+
+  const notesContainer = document.createElement("div");
+  notesContainer.className = "px-2 m-2";
+
+  const notesHeader = document.createElement("div");
+  notesHeader.className = "flex justify-between py-2 my-2";
+
+  const notesLabel = document.createElement("Label");
+  notesLabel.textContent = "Notes";
+  notesLabel.className = "block text-md font-bold";
+
+  const notesBtn = document.createElement("button");
+  notesBtn.className =
+    "w-20 h-8 border flex items-center justify-center text-sm";
+  notesBtn.textContent = "Save";
+
+  const notesText = document.createElement("textarea");
+  notesText.rows = "3";
+  notesText.className = "border text-sm w-full";
+
   content.appendChild(btnContainer);
   content.appendChild(titel);
   content.appendChild(beschreibung);
@@ -117,10 +102,17 @@ const createCard = (item, target) => {
   card.appendChild(imgContainer);
   card.appendChild(content);
 
+  content.appendChild(form);
+  form.appendChild(notesContainer);
+  notesContainer.appendChild(notesHeader);
+  notesHeader.appendChild(notesLabel);
+  notesHeader.appendChild(notesBtn);
+  notesContainer.appendChild(notesText);
+
   target.appendChild(card);
 
   btnN.addEventListener("click", (event) => {
-    showNotes(event, content);
+    showNotes(event, form);
   });
 };
 
