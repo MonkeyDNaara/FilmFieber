@@ -1,5 +1,7 @@
+// Imports
 import { API_URL, API_TOKEN, API_KEY, LANGUAGE } from "./config.js";
 
+// Functions
 const options = {
   method: "GET",
   headers: { accept: "application/json", Authorization: `Bearer ${API_TOKEN}` },
@@ -24,3 +26,6 @@ const fetchMovies = async (page) => {
     return;
   }
 };
+
+// Exports
+export { fetchMovies };

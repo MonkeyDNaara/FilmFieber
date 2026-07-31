@@ -1,8 +1,53 @@
 import { BASE_IMG_URL, IMG_SIZE } from "./config";
+import { getData, saveData } from "./storage";
 
-const createCard = (item) => {
-  const app = document.getElementById("app");
+let notesVisible = false;
 
+const createNotes = (container) => {
+  // const content = document.querySelector("#content");
+
+  const form = document.createElement("form");
+
+  const notesContainer = document.createElement("div");
+  notesContainer.className = "px-2 m-2";
+
+  const notesHeader = document.createElement("div");
+  notesHeader.className = "flex justify-between py-2 my-2";
+
+  const notesLabel = document.createElement("Label");
+  notesLabel.textContent = "Notes";
+  notesLabel.className = "block text-md font-bold";
+
+  const notesBtn = document.createElement("button");
+  notesBtn.className =
+    "w-20 h-8 border flex items-center justify-center text-sm";
+  notesBtn.textContent = "Save";
+
+  const notesText = document.createElement("textarea");
+  notesText.rows = "3";
+  notesText.className = "border text-sm w-full";
+
+  container.appendChild(form);
+  form.appendChild(notesContainer);
+  notesContainer.appendChild(notesHeader);
+  notesHeader.appendChild(notesLabel);
+  notesHeader.appendChild(notesBtn);
+  notesContainer.appendChild(notesText);
+};
+
+const showNotes = (event, container) => {
+  event.preventDefault();
+  if (!notesVisible) {
+    notesVisible = true;
+    createNotes(container);
+  } else {
+    const notes = document.querySelector("form");
+    notes.remove();
+    notesVisible = false;
+  }
+};
+
+const createCard = (item, target) => {
   const card = document.createElement("div");
   card.className = "w-100 border flex";
 
@@ -11,11 +56,11 @@ const createCard = (item) => {
 
   const btnN = document.createElement("button");
   btnN.className = "w-8 h-8 border flex items-center justify-center text-sm";
-  btnN.textContent = "N";
+  btnN.textContent = "📄";
 
   const btnStar = document.createElement("button");
   btnStar.className = "w-8 h-8 border flex items-center justify-center text-sm";
-  btnStar.textContent = "★";
+  btnStar.textContent = "☆";
 
   btnContainer.appendChild(btnN);
   btnContainer.appendChild(btnStar);
@@ -29,6 +74,7 @@ const createCard = (item) => {
   imgContainer.appendChild(img);
 
   const content = document.createElement("div");
+  content.id = "content";
   content.className = "flex-1 flex flex-col";
 
   const titel = document.createElement("div");
@@ -46,7 +92,11 @@ const createCard = (item) => {
   card.appendChild(imgContainer);
   card.appendChild(content);
 
-  app.appendChild(card);
+  target.appendChild(card);
+
+  btnN.addEventListener("click", (event) => {
+    showNotes(event, content);
+  });
 };
 
 export { createCard };
