@@ -5,6 +5,19 @@ import {
   removeItemFromStorage,
 } from "./storage";
 
+const handleFavorite = (event, item) => {
+  const button = event.target;
+  if (isItemInStorage(item.id)) {
+    removeItemFromStorage(item.id);
+    button.classList.remove("bg-red-500");
+    button.classList.add("bg-green-500");
+  } else {
+    addItemToStorage(item);
+    button.classList.remove("bg-green-500");
+    button.classList.add("bg-red-500");
+  }
+};
+
 const createCard = (item, target) => {
   const card = document.createElement("div");
   card.className = "w-100 border flex";
@@ -20,25 +33,13 @@ const createCard = (item, target) => {
   btnStar.className = "w-8 h-8 border flex items-center justify-center text-sm";
   btnStar.textContent = "★";
 
-  const handleFavorite = (event) => {
-    if (isItemInStorage(item.id)) {
-      removeItemFromStorage(item.id);
-      btnStar.classList.remove("bg-red-500");
-      btnStar.classList.add("bg-green-500");
-    } else {
-      addItemToStorage(item);
-      btnStar.classList.remove("bg-green-500");
-      btnStar.classList.add("bg-red-500");
-    }
-  };
+  const isInStorage = isItemInStorage(item.id);
+  btnStar.classList.toggle("bg-red-500", isInStorage);
+  btnStar.classList.toggle("bg-green-500", !isInStorage);
 
-  if (isItemInStorage(item.id)) {
-    btnStar.classList.add("bg-red-500");
-  } else {
-    btnStar.classList.add("bg-green-500");
-  }
-
-  btnStar.addEventListener("click", handleFavorite);
+  btnStar.addEventListener("click", (event) => {
+    handleFavorite(event, item);
+  });
 
   btnContainer.appendChild(btnN);
   btnContainer.appendChild(btnStar);
