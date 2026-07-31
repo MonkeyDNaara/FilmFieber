@@ -1,23 +1,30 @@
-/**
- * Optionaler Fetch-Layer für FilmFieber.
- *
- * Aktuell: Platzhalter-Implementierung, damit `main.js` sauber andocken kann.
- * Wenn die Gruppe `fetch.js` fertig hat, kann diese Datei ersetzt werden.
- *
- * Kontrakt für spätere Implementierung:
- * - getTrending() -> array
- * - getMovie(id) -> object | null
- * - getSimilar(id) -> array
- */
+import { API_URL, API_TOKEN, API_KEY, LANGUAGE } from "./config.js";
 
-export async function getTrending() {
-  return [];
-}
+// Functions
+const options = {
+  method: "GET",
+  headers: { accept: "application/json", Authorization: `Bearer ${API_TOKEN}` },
+};
 
-export async function getMovie(id) {
-  return null;
-}
+const fetchMovies = async (page) => {
+  try {
+    const response = await fetch(
+      `${API_URL}?language=${LANGUAGE}&page=${page}`,
+      options,
+    );
 
-export async function getSimilar(id) {
-  return [];
-}
+    if (!response.ok) {
+      throw new Error(
+        `Fehler bei laden von Seite ${page}. Status: ${response.status}`,
+      );
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error(error.message);
+    return;
+  }
+};
+
+// Exports
+export { fetchMovies };
