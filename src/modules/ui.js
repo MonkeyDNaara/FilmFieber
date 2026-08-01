@@ -31,8 +31,12 @@ const showNotes = (event, container) => {
 
 const saveNotes = (event, item, text) => {
   event.preventDefault();
-  // addItemToStorage(item);
-  addNoteToItem(item.id, text);
+  if (!isItemInStorage(item.id)) {
+    addItemToStorage(item);
+    addNoteToItem(item.id, text);
+  } else {
+    addNoteToItem(item.id, text);
+  }
 };
 
 const createCard = (item, target) => {
