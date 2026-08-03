@@ -9,15 +9,19 @@ import {
 
 const handleFavorite = (event, item) => {
   const button = event.target;
+  let isFavorite = false;
   if (isItemInStorage(item.id)) {
     removeItemFromStorage(item.id);
-    button.classList.remove("bg-red-500");
-    button.classList.add("bg-green-500");
+    isFavorite = false;
   } else {
     addItemToStorage(item);
-    button.classList.remove("bg-green-500");
-    button.classList.add("bg-red-500");
+    isFavorite = true;
   }
+  const favoriteEvent = new CustomEvent("favoriteChanged", {
+    bubbles: true,
+    detail: { isFavorite },
+  });
+  button.dispatchEvent(favoriteEvent);
 };
 
 const showNotes = (event, container) => {
@@ -34,6 +38,11 @@ const saveNotes = (event, item, text) => {
   if (!isItemInStorage(item.id)) {
     addItemToStorage(item);
     addNoteToItem(item.id, text);
+    const favoriteEvent = new CustomEvent("favoriteChanged", {
+      bubbles: true,
+      detail: { isFavorite: true },
+    });
+    event.target.dispatchEvent(favoriteEvent);
   } else {
     addNoteToItem(item.id, text);
   }
@@ -41,7 +50,7 @@ const saveNotes = (event, item, text) => {
 
 const createCard = (item, target) => {
   const card = document.createElement("div");
-  card.className = "w-100 border flex";
+  card.className = "moviecard w-100 border flex";
 
   const btnContainer = document.createElement("div");
   btnContainer.className = "flex self-end";
@@ -129,6 +138,12 @@ const createCard = (item, target) => {
   });
   notesBtn.addEventListener("click", (event) => {
     saveNotes(event, item, notesText.value);
+  });
+
+  card.addEventListener("favoriteChanged", (event) => {
+    const isFavorite = event.detail.isFavorite;
+    btnStar.classList.toggle("bg-red-500", isFavorite);
+    btnStar.classList.toggle("bg-green-500", !isFavorite);
   });
 };
 
