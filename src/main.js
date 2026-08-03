@@ -20,5 +20,22 @@ movies.results.forEach((movie) => {
 
 // saveData(movies.results);
 
+// Search
+const searchForm = document.querySelector("search > form");
+const searchField = document.getElementById("search");
+const searchResultContainer = document.getElementById("searchresults");
+
+searchForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (event.target.search.value === "") {
+    searchResultContainer.replaceChildren();
+  }
+  const query = encodeURIComponent(event.target.search.value);
+  const searchResults = await fetchSearchQuery(query, 1);
+  searchResults.results.forEach((movie) => {
+    createCard(movie, searchResultContainer);
+  });
+});
+
 // Export
 export { cardContainer, form };
