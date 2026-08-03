@@ -7,17 +7,21 @@ import {
   getData,
 } from "./storage";
 
-const handleFavorite = (event, item) => {
+const handleFavorite = (event, item, card) => {
   const button = event.target;
+  let isFavorite = false;
   if (isItemInStorage(item.id)) {
     removeItemFromStorage(item.id);
-    button.classList.remove("bg-red-500");
-    button.classList.add("bg-green-500");
+    isFavorite = false;
   } else {
     addItemToStorage(item);
-    button.classList.remove("bg-green-500");
-    button.classList.add("bg-red-500");
+    isFavorite = true;
   }
+  const favoriteEvent = new CustomEvent("favoriteChanged", {
+    bubbles: true,
+    detail: { isFavorite, card },
+  });
+  button.dispatchEvent(favoriteEvent);
 };
 
 const showNotes = (event, container) => {
@@ -59,7 +63,7 @@ const createCard = (item, target) => {
   btnStar.classList.toggle("bg-green-500", !isInStorage);
 
   btnStar.addEventListener("click", (event) => {
-    handleFavorite(event, item);
+    handleFavorite(event, item, card);
   });
 
   btnContainer.appendChild(btnN);
@@ -129,6 +133,14 @@ const createCard = (item, target) => {
   });
   notesBtn.addEventListener("click", (event) => {
     saveNotes(event, item, notesText.value);
+  });
+
+  card.addEventListener("favoriteChanged", (event) => {
+    console.log(event);
+
+    const isFavorite = event.detail.isFavorite;
+    btnStar.classList.toggle("bg-red-500", isFavorite);
+    btnStar.classList.toggle("bg-green-500", !isFavorite);
   });
 };
 
