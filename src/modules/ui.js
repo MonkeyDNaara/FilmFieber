@@ -50,7 +50,7 @@ const saveNotes = (event, item, text) => {
 
 const createCard = (item, target) => {
   const card = document.createElement("div");
-  card.className = "w-100 border flex";
+  card.className = "moviecard w-100 border flex";
 
   const btnContainer = document.createElement("div");
   btnContainer.className = "flex self-end";
