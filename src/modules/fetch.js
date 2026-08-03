@@ -10,7 +10,27 @@ const options = {
 const fetchMovies = async (page) => {
   try {
     const response = await fetch(
-      `${API_URL}?language=${LANGUAGE}&page=${page}`,
+      `${API_URL}movie/popular?language=${LANGUAGE}&page=${page}`,
+      options,
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Fehler bei laden von Seite ${page}. Status: ${response.status}`,
+      );
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error(error.message);
+    return;
+  }
+};
+
+const fetchSearchQuery = async (query, page) => {
+  try {
+    const response = await fetch(
+      `${API_URL}search/movie?query=${query}&language=${LANGUAGE}&page=${page}`,
       options,
     );
 
@@ -28,4 +48,4 @@ const fetchMovies = async (page) => {
 };
 
 // Exports
-export { fetchMovies };
+export { fetchMovies, fetchSearchQuery };
