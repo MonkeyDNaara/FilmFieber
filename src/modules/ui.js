@@ -7,7 +7,7 @@ import {
   getData,
 } from "./storage";
 
-const handleFavorite = (event, item, card) => {
+const handleFavorite = (event, item) => {
   const button = event.target;
   let isFavorite = false;
   if (isItemInStorage(item.id)) {
@@ -19,7 +19,7 @@ const handleFavorite = (event, item, card) => {
   }
   const favoriteEvent = new CustomEvent("favoriteChanged", {
     bubbles: true,
-    detail: { isFavorite, card },
+    detail: { isFavorite },
   });
   button.dispatchEvent(favoriteEvent);
 };
@@ -38,6 +38,11 @@ const saveNotes = (event, item, text) => {
   if (!isItemInStorage(item.id)) {
     addItemToStorage(item);
     addNoteToItem(item.id, text);
+    const favoriteEvent = new CustomEvent("favoriteChanged", {
+      bubbles: true,
+      detail: { isFavorite: true },
+    });
+    event.target.dispatchEvent(favoriteEvent);
   } else {
     addNoteToItem(item.id, text);
   }
@@ -63,7 +68,7 @@ const createCard = (item, target) => {
   btnStar.classList.toggle("bg-green-500", !isInStorage);
 
   btnStar.addEventListener("click", (event) => {
-    handleFavorite(event, item, card);
+    handleFavorite(event, item);
   });
 
   btnContainer.appendChild(btnN);
@@ -136,8 +141,6 @@ const createCard = (item, target) => {
   });
 
   card.addEventListener("favoriteChanged", (event) => {
-    console.log(event);
-
     const isFavorite = event.detail.isFavorite;
     btnStar.classList.toggle("bg-red-500", isFavorite);
     btnStar.classList.toggle("bg-green-500", !isFavorite);
