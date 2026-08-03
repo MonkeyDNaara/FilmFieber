@@ -11,23 +11,56 @@
   </head>
   <body class="min-h-screen antialiased">
     <header class="site-header header-glass">
-      <div class="flex items-center justify-between max-w-4xl mx-auto px-4 py-3">
-        <a href="/" class="flex items-center gap-2 text-neutral-100 no-underline">
-          <svg class="w-7 h-7 text-yellow-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 3l2.4 7.2H21l-5.6 4.8L16.8 19 12 15.2 7.2 19l1.2-5.6L3 10.2h6.6z"/>
+      <div
+        class="flex items-center justify-between max-w-4xl mx-auto px-4 py-3"
+      >
+        <a
+          href="/"
+          class="flex items-center gap-2 text-neutral-100 no-underline"
+        >
+          <svg
+            class="w-7 h-7 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 3l2.4 7.2H21l-5.6 4.8L16.8 19 12 15.2 7.2 19l1.2-5.6L3 10.2h6.6z"
+            />
           </svg>
           <span class="font-display text-xl gold-title">FilmFieber</span>
         </a>
         <nav class="flex gap-2">
-          <a href="/" class="nav-chip px-3 py-1 rounded-full text-sm font-medium text-neutral-200 hover:text-white transition-colors">Filme</a>
-          <a href="journal.html" class="nav-chip px-3 py-1 rounded-full text-sm font-medium text-neutral-200 hover:text-white transition-colors">Journal</a>
+          <a
+            href="/"
+            class="nav-chip px-3 py-1 rounded-full text-sm font-medium text-neutral-200 hover:text-white transition-colors active"
+            >Filme</a
+          >
+          <a
+            href="journal.html"
+            class="nav-chip px-3 py-1 rounded-full text-sm font-medium text-neutral-200 hover:text-white transition-colors"
+            >Journal</a
+          >
         </nav>
       </div>
     </header>
 
     <main class="relative z-10 pb-12">
       <div id="app">
-        <div id="card_container"></div>
+        <div
+          id="card_container"
+          class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 justify-items-center"
+        ></div>
+        <div
+          id="button_container"
+          class="flex w-full align-center justify-center"
+        >
+          <button
+            class="nav-chip px-3 py-1 rounded-full text-sm font-medium text-neutral-200 hover:text-white transition-colors"
+          >
+            Show more
+          </button>
+        </div>
       </div>
     </main>
   </body>
