@@ -20,10 +20,7 @@
     min-height: 100vh;
   }
   body {
-    background:
-      radial-gradient(circle at 15% 10%, #2a0c6e 0%, transparent 45%),
-      radial-gradient(circle at 85% 20%, #3b1a5b 0%, transparent 45%),
-      radial-gradient(circle at 50% 100%, #1a0730 0%, transparent 55%), #05030a;
+    background: #05030a;
     position: relative;
   }
   body::before {
@@ -33,9 +30,10 @@
     background-image: url("/cinema-bg.jpg");
     background-size: cover;
     background-position: center;
-    opacity: 0.97;
-    filter: blur(2px) brightness(0.8);
-    mix-blend-mode: screen;
+    opacity: 0.85;
+    filter: brightness(1.1);
+    /* mix-blend-mode entfernt: screen dunkelte das Bild aus. Stattdessen liegt
+       das Bild über der dunklen body-Fläche (z-index 0) für maximale Sichtbarkeit. */
     pointer-events: none;
     z-index: 0;
   }
@@ -73,10 +71,13 @@
       rgba(10, 10, 10, 0.55)
     );
     border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(18px) saturate(140%);
+    /* Doppelter Backglow (weiß + lila) für Header */
     box-shadow:
+      0 0 8px rgba(255, 255, 255, 0.55),
+      0 0 18px rgba(168, 85, 247, 0.55),
       0 12px 35px rgba(0, 0, 0, 0.5),
       inset 0 1px 0 rgba(255, 255, 255, 0.22);
-    backdrop-filter: blur(18px) saturate(140%);
   }
   .site-header {
     position: sticky;
@@ -106,11 +107,28 @@
     );
     border-color: rgba(255, 255, 255, 0.22);
   }
-  .film-card {
+  /* Wiederverwendetes glass-card Muster + doppelter Backglow (weiß + lila) für Karten.
+     .moviecard (aus ui.js) erhöht die Spezifikität, damit Tailwind's
+     shadow-md / shadow-white im class-Attribut nicht überschreiben. */
+  .moviecard.film-card {
     transition:
       transform 200ms ease,
       border-color 200ms ease,
       box-shadow 200ms ease;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.03)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(14px) saturate(130%);
+    /* !important am Ende der Shadow-Liste (gültige Syntax für die ganze Liste),
+       damit Tailwind .shadow-md/.shadow-white aus ui.js nicht überschreiben. */
+    box-shadow:
+      0 0 8px rgba(255, 255, 255, 0.6),
+      0 0 18px rgba(168, 85, 247, 0.7),
+      0 14px 40px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
   }
   .search-glass {
     background: linear-gradient(
@@ -219,46 +237,5 @@
     box-shadow: 0 0 8px rgba(255, 246, 194, 0.9);
     pointer-events: none;
     animation: spark 2200ms ease-in-out infinite;
-  }
-  .orb {
-    position: absolute;
-    border-radius: 9999px;
-    filter: blur(90px);
-    opacity: 0.55;
-    animation: orbPulse 2600ms ease-in-out infinite;
-    pointer-events: none;
-  }
-  .orb-top {
-    left: 12%;
-    top: 8%;
-    width: 420px;
-    height: 420px;
-    background: radial-gradient(
-      circle,
-      rgba(124, 58, 237, 0.55),
-      rgba(60, 20, 140, 0)
-    );
-  }
-  .orb-bottom {
-    left: 6%;
-    bottom: 6%;
-    width: 260px;
-    height: 260px;
-    background: radial-gradient(
-      circle,
-      rgba(124, 58, 237, 0.45),
-      rgba(60, 20, 140, 0)
-    );
-  }
-  @keyframes orbPulse {
-    0%,
-    100% {
-      transform: scale(0.94);
-      opacity: 0.45;
-    }
-    50% {
-      transform: scale(1.08);
-      opacity: 0.75;
-    }
   }
 }
