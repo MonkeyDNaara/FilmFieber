@@ -6,18 +6,46 @@ import { createCard } from "./modules/ui.js";
 // DOM-Elemente auslesen
 const cardContainer = document.querySelector("#card_container");
 const form = document.querySelector("#search_form");
+const moreButton = document.querySelector("#show_more_button");
 
 // Funktionen
+// Show more Function
 let pagesShown = 1;
-const movies = await fetchMovies(pagesShown);
+let movies = {};
+let allMovies = [];
+
+const showMovies = async () => {
+  for (let i = 1; i <= pagesShown; i++) {
+    movies = await fetchMovies(i);
+    allMovies.push(movies);
+  }
+  allMovies.forEach((movieList) => {
+    movieList.results.forEach((movie) => {
+      createCard(movie, cardContainer);
+    });
+  });
+  if (pagesShown > 1) {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
+  }
+};
+
+showMovies();
+
+const showMorePages = (event) => {
+  event.preventDefault();
+  cardContainer.innerHTML = "";
+  allMovies = [];
+  pagesShown++;
+  showMovies();
+};
+
+moreButton.addEventListener("click", showMorePages);
 
 // const searchResult = await fetchSearchQuery("Interstel", 1);
 // console.log(searchResult);
-
-movies.results.forEach((movie) => {
-  createCard(movie, cardContainer);
-});
-
 // saveData(movies.results);
 
 // Search
@@ -34,4 +62,4 @@ searchField.addEventListener("search", async (event) => {
 });
 
 // Export
-export { cardContainer, form };
+export { cardContainer, form, pagesShown };
