@@ -12,32 +12,18 @@ const moreButton = document.querySelector("#show_more_button");
 // Show more Function
 let pagesShown = 1;
 let movies = {};
-let allMovies = [];
 
 const showMovies = async () => {
-  for (let i = 1; i <= pagesShown; i++) {
-    movies = await fetchMovies(i);
-    allMovies.push(movies);
-  }
-  allMovies.forEach((movieList) => {
-    movieList.results.forEach((movie) => {
-      createCard(movie, cardContainer);
-    });
+  movies = await fetchMovies(pagesShown);
+  movies.results.forEach((movie) => {
+    createCard(movie, cardContainer);
   });
-  if (pagesShown > 1) {
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth",
-    });
-  }
 };
 
 showMovies();
 
 const showMorePages = (event) => {
   event.preventDefault();
-  cardContainer.innerHTML = "";
-  allMovies = [];
   pagesShown++;
   showMovies();
 };
