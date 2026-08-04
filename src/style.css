@@ -7,8 +7,6 @@
   --color-brand-dark-hover: #5e22c4;
   --color-brand-purple: #4c1d95;
   --color-brand-accent: #f5d061;
-  --color-glass-border: rgba(255, 255, 255, 0.18);
-  --color-glass-surface: rgba(10, 10, 10, 0.55);
   --font-display: "Bebas Neue", sans-serif;
   --font-body: "Inter", sans-serif;
 }
@@ -37,32 +35,37 @@
     pointer-events: none;
     z-index: 0;
   }
-}
+  }
 
 @layer components {
-  .glass-panel {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.12),
-      rgba(255, 255, 255, 0.04)
-    );
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.55),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(18px) saturate(140%);
-  }
-  .glass-card {
+  /* Gemeinsames Glass-Card Grundgerüst — DRY für .glass-card (wiederverwendbar
+     für andere Komponenten) und .moviecard.film-card (Karten aus ui.js).
+     .moviecard erhöht die Spezifikität gegen Tailwind .shadow-md/.shadow-white. */
+  .glass-card,
+  .moviecard.film-card {
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.1),
       rgba(255, 255, 255, 0.03)
     );
     border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(14px) saturate(130%);
     box-shadow:
       0 14px 40px rgba(0, 0, 0, 0.5),
       inset 0 1px 0 rgba(255, 255, 255, 0.22);
-    backdrop-filter: blur(14px) saturate(130%);
+  }
+  .moviecard.film-card {
+    transition:
+      transform 200ms ease,
+      border-color 200ms ease,
+      box-shadow 200ms ease;
+    /* !important am Ende der Shadow-Liste (gültige Syntax für die ganze Liste),
+       damit Tailwind .shadow-md/.shadow-white aus ui.js nicht überschreiben. */
+    box-shadow:
+      0 0 8px rgba(255, 255, 255, 0.6),
+      0 0 18px rgba(168, 85, 247, 0.7),
+      0 14px 40px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
   }
   .header-glass {
     background: linear-gradient(
@@ -84,9 +87,6 @@
     top: 0;
     z-index: 30;
   }
-  .brand-text {
-    transition: opacity 200ms ease, transform 200ms ease;
-  }
   .nav-chip {
     background: linear-gradient(
       180deg,
@@ -106,67 +106,6 @@
       rgba(76, 29, 149, 0.55)
     );
     border-color: rgba(255, 255, 255, 0.22);
-  }
-  /* Wiederverwendetes glass-card Muster + doppelter Backglow (weiß + lila) für Karten.
-     .moviecard (aus ui.js) erhöht die Spezifikität, damit Tailwind's
-     shadow-md / shadow-white im class-Attribut nicht überschreiben. */
-  .moviecard.film-card {
-    transition:
-      transform 200ms ease,
-      border-color 200ms ease,
-      box-shadow 200ms ease;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.1),
-      rgba(255, 255, 255, 0.03)
-    );
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    backdrop-filter: blur(14px) saturate(130%);
-    /* !important am Ende der Shadow-Liste (gültige Syntax für die ganze Liste),
-       damit Tailwind .shadow-md/.shadow-white aus ui.js nicht überschreiben. */
-    box-shadow:
-      0 0 8px rgba(255, 255, 255, 0.6),
-      0 0 18px rgba(168, 85, 247, 0.7),
-      0 14px 40px rgba(0, 0, 0, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
-  }
-  .search-glass {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.14),
-      rgba(255, 255, 255, 0.04)
-    );
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow:
-      0 14px 40px rgba(0, 0, 0, 0.45),
-      inset 0 1px 0 rgba(255, 255, 255, 0.22);
-    backdrop-filter: blur(16px) saturate(130%);
-  }
-  .star-field {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .star {
-    position: absolute;
-    border-radius: 9999px;
-    background: #f5d061;
-    box-shadow:
-      0 0 8px rgba(245, 208, 97, 0.75),
-      0 0 18px rgba(245, 208, 97, 0.35);
-    animation: twinkle 2400ms ease-in-out infinite;
-  }
-  @keyframes twinkle {
-    0%,
-    100% {
-      opacity: 0.25;
-      transform: translateY(0px) scale(0.92);
-    }
-    50% {
-      opacity: 1;
-      transform: translateY(-2px) scale(1.05);
-    }
   }
   .gold-title {
     font-family: var(--font-display);
@@ -212,30 +151,5 @@
       filter: drop-shadow(0 0 28px rgba(255, 215, 0, 0.45))
         drop-shadow(0 0 80px rgba(124, 58, 237, 0.35));
     }
-  }
-  @keyframes spark {
-    0%,
-    100% {
-      opacity: 0;
-      transform: translate(0, 0) scale(0.7);
-    }
-    40% {
-      opacity: 1;
-      transform: translate(6px, -4px) scale(1.2);
-    }
-    70% {
-      opacity: 1;
-      transform: translate(-3px, -8px) scale(1);
-    }
-  }
-  .spark {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    border-radius: 9999px;
-    background: #fff6c2;
-    box-shadow: 0 0 8px rgba(255, 246, 194, 0.9);
-    pointer-events: none;
-    animation: spark 2200ms ease-in-out infinite;
   }
 }
