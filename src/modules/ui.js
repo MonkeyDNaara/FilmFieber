@@ -1,4 +1,5 @@
 import { BASE_IMG_URL, IMG_SIZE } from "./config";
+import placeholder from "../assets/placeholder.png";
 import {
   addItemToStorage,
   isItemInStorage,
@@ -80,7 +81,9 @@ const createCard = (item, target) => {
   imgContainer.className = "w-32 border";
 
   const img = document.createElement("img");
-  img.src = BASE_IMG_URL + IMG_SIZE + item.poster_path;
+  img.src = item.poster_path
+    ? BASE_IMG_URL + IMG_SIZE + item.poster_path
+    : placeholder;
 
   imgContainer.appendChild(img);
 
