@@ -7,8 +7,6 @@
   --color-brand-dark-hover: #5e22c4;
   --color-brand-purple: #4c1d95;
   --color-brand-accent: #f5d061;
-  --color-glass-border: rgba(255, 255, 255, 0.18);
-  --color-glass-surface: rgba(10, 10, 10, 0.55);
   --font-display: "Bebas Neue", sans-serif;
   --font-body: "Inter", sans-serif;
 }
@@ -20,10 +18,7 @@
     min-height: 100vh;
   }
   body {
-    background:
-      radial-gradient(circle at 15% 10%, #2a0c6e 0%, transparent 45%),
-      radial-gradient(circle at 85% 20%, #3b1a5b 0%, transparent 45%),
-      radial-gradient(circle at 50% 100%, #1a0730 0%, transparent 55%), #05030a;
+    background: #05030a;
     position: relative;
   }
   body::before {
@@ -33,38 +28,44 @@
     background-image: url("/cinema-bg.jpg");
     background-size: cover;
     background-position: center;
-    opacity: 0.97;
-    filter: blur(2px) brightness(0.8);
-    mix-blend-mode: screen;
+    opacity: 0.85;
+    filter: brightness(1.1);
+    /* mix-blend-mode entfernt: screen dunkelte das Bild aus. Stattdessen liegt
+       das Bild über der dunklen body-Fläche (z-index 0) für maximale Sichtbarkeit. */
     pointer-events: none;
     z-index: 0;
   }
-}
+  }
 
 @layer components {
-  .glass-panel {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.12),
-      rgba(255, 255, 255, 0.04)
-    );
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.55),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(18px) saturate(140%);
-  }
-  .glass-card {
+  /* Gemeinsames Glass-Card Grundgerüst — DRY für .glass-card (wiederverwendbar
+     für andere Komponenten) und .moviecard.film-card (Karten aus ui.js).
+     .moviecard erhöht die Spezifikität gegen Tailwind .shadow-md/.shadow-white. */
+  .glass-card,
+  .moviecard.film-card {
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.1),
       rgba(255, 255, 255, 0.03)
     );
     border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(14px) saturate(130%);
     box-shadow:
       0 14px 40px rgba(0, 0, 0, 0.5),
       inset 0 1px 0 rgba(255, 255, 255, 0.22);
-    backdrop-filter: blur(14px) saturate(130%);
+  }
+  .moviecard.film-card {
+    transition:
+      transform 200ms ease,
+      border-color 200ms ease,
+      box-shadow 200ms ease;
+    /* !important am Ende der Shadow-Liste (gültige Syntax für die ganze Liste),
+       damit Tailwind .shadow-md/.shadow-white aus ui.js nicht überschreiben. */
+    box-shadow:
+      0 0 8px rgba(255, 255, 255, 0.6),
+      0 0 18px rgba(168, 85, 247, 0.7),
+      0 14px 40px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
   }
   .header-glass {
     background: linear-gradient(
@@ -73,18 +74,18 @@
       rgba(10, 10, 10, 0.55)
     );
     border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(18px) saturate(140%);
+    /* Doppelter Backglow (weiß + lila) für Header */
     box-shadow:
+      0 0 8px rgba(255, 255, 255, 0.55),
+      0 0 18px rgba(168, 85, 247, 0.55),
       0 12px 35px rgba(0, 0, 0, 0.5),
       inset 0 1px 0 rgba(255, 255, 255, 0.22);
-    backdrop-filter: blur(18px) saturate(140%);
   }
   .site-header {
     position: sticky;
     top: 0;
     z-index: 30;
-  }
-  .brand-text {
-    transition: opacity 200ms ease, transform 200ms ease;
   }
   .nav-chip {
     background: linear-gradient(
@@ -105,50 +106,6 @@
       rgba(76, 29, 149, 0.55)
     );
     border-color: rgba(255, 255, 255, 0.22);
-  }
-  .film-card {
-    transition:
-      transform 200ms ease,
-      border-color 200ms ease,
-      box-shadow 200ms ease;
-  }
-  .search-glass {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.14),
-      rgba(255, 255, 255, 0.04)
-    );
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow:
-      0 14px 40px rgba(0, 0, 0, 0.45),
-      inset 0 1px 0 rgba(255, 255, 255, 0.22);
-    backdrop-filter: blur(16px) saturate(130%);
-  }
-  .star-field {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .star {
-    position: absolute;
-    border-radius: 9999px;
-    background: #f5d061;
-    box-shadow:
-      0 0 8px rgba(245, 208, 97, 0.75),
-      0 0 18px rgba(245, 208, 97, 0.35);
-    animation: twinkle 2400ms ease-in-out infinite;
-  }
-  @keyframes twinkle {
-    0%,
-    100% {
-      opacity: 0.25;
-      transform: translateY(0px) scale(0.92);
-    }
-    50% {
-      opacity: 1;
-      transform: translateY(-2px) scale(1.05);
-    }
   }
   .gold-title {
     font-family: var(--font-display);
@@ -193,72 +150,6 @@
     50% {
       filter: drop-shadow(0 0 28px rgba(255, 215, 0, 0.45))
         drop-shadow(0 0 80px rgba(124, 58, 237, 0.35));
-    }
-  }
-  @keyframes spark {
-    0%,
-    100% {
-      opacity: 0;
-      transform: translate(0, 0) scale(0.7);
-    }
-    40% {
-      opacity: 1;
-      transform: translate(6px, -4px) scale(1.2);
-    }
-    70% {
-      opacity: 1;
-      transform: translate(-3px, -8px) scale(1);
-    }
-  }
-  .spark {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    border-radius: 9999px;
-    background: #fff6c2;
-    box-shadow: 0 0 8px rgba(255, 246, 194, 0.9);
-    pointer-events: none;
-    animation: spark 2200ms ease-in-out infinite;
-  }
-  .orb {
-    position: absolute;
-    border-radius: 9999px;
-    filter: blur(90px);
-    opacity: 0.55;
-    animation: orbPulse 2600ms ease-in-out infinite;
-    pointer-events: none;
-  }
-  .orb-top {
-    left: 12%;
-    top: 8%;
-    width: 420px;
-    height: 420px;
-    background: radial-gradient(
-      circle,
-      rgba(124, 58, 237, 0.55),
-      rgba(60, 20, 140, 0)
-    );
-  }
-  .orb-bottom {
-    left: 6%;
-    bottom: 6%;
-    width: 260px;
-    height: 260px;
-    background: radial-gradient(
-      circle,
-      rgba(124, 58, 237, 0.45),
-      rgba(60, 20, 140, 0)
-    );
-  }
-  @keyframes orbPulse {
-    0%,
-    100% {
-      transform: scale(0.94);
-      opacity: 0.45;
-    }
-    50% {
-      transform: scale(1.08);
-      opacity: 0.75;
     }
   }
 }
