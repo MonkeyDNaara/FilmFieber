@@ -87,6 +87,7 @@
       max-height: 100%;
       overflow-y: auto;
       overflow-x: hidden;
+      color: #f1f5f9;
 
       /* Dark-scrollbar für die Filmtexte */
       &::-webkit-scrollbar {
