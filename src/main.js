@@ -7,6 +7,9 @@ import { createCard } from "./modules/ui.js";
 const cardContainer = document.querySelector("#card_container");
 const form = document.querySelector("#search_form");
 const moreButton = document.querySelector("#show_more_button");
+const recoContainer = document.querySelector("#recommendations");
+const searchField = document.getElementById("search");
+const searchResultContainer = document.getElementById("searchresults");
 
 // Funktionen
 // Show more Function
@@ -30,13 +33,29 @@ const showMorePages = (event) => {
 
 moreButton.addEventListener("click", showMorePages);
 
+// Recommendations
+const recoMovies = [
+  { title: "Blind", id: "22881" },
+  { title: "Spider", id: "969681" },
+];
+let recoFetchMovies = {};
+const recoResults = [];
+let test = {};
+
+recoMovies.forEach(async (recos) => {
+  recoFetchMovies = await fetchSearchQuery(recos.title, 1);
+  recoFetchMovies.results.forEach((movie) => {
+    if (movie.id == recos.id) {
+      createCard(movie, recoContainer);
+    }
+  });
+});
+
 // const searchResult = await fetchSearchQuery("Interstel", 1);
 // console.log(searchResult);
 // saveData(movies.results);
 
 // Search
-const searchField = document.getElementById("search");
-const searchResultContainer = document.getElementById("searchresults");
 
 searchField.addEventListener("search", async (event) => {
   searchResultContainer.replaceChildren();
