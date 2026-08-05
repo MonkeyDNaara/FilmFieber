@@ -53,22 +53,21 @@ const createCard = (item, target) => {
   const card = document.createElement("div");
   const data = getData();
   card.className =
-    "moviecard film-card w-100 border flex m-2 rounded shadow-md shadow-white";
+    "moviecard film-card w-100 flex m-2 rounded shadow-md shadow-white";
 
   const btnContainer = document.createElement("div");
   btnContainer.className = "flex self-end";
 
   const btnN = document.createElement("button");
-  btnN.className = "w-8 h-8 border flex items-center justify-center text-sm";
+  btnN.className = "w-8 h-8 flex items-center justify-center text-sm";
   btnN.textContent = "📄";
 
   const btnStar = document.createElement("button");
-  btnStar.className = "w-8 h-8 border flex items-center justify-center text-sm";
+  btnStar.className = "w-8 h-8 flex items-center justify-center text-sm";
   btnStar.textContent = "★";
 
   const isInStorage = isItemInStorage(item.id);
-  btnStar.classList.toggle("bg-red-500", isInStorage);
-  btnStar.classList.toggle("bg-green-500", !isInStorage);
+  btnStar.classList.toggle("favorited", isInStorage);
 
   btnStar.addEventListener("click", (event) => {
     handleFavorite(event, item);
@@ -78,7 +77,7 @@ const createCard = (item, target) => {
   btnContainer.appendChild(btnStar);
 
   const imgContainer = document.createElement("div");
-  imgContainer.className = "w-32 border";
+  imgContainer.className = "w-32";
 
   const img = document.createElement("img");
   img.src = item.poster_path
@@ -92,11 +91,11 @@ const createCard = (item, target) => {
   content.className = "flex-1 flex flex-col";
 
   const titel = document.createElement("div");
-  titel.className = "border px-2 text-md font-bold";
+  titel.className = "px-2 text-md font-bold";
   titel.textContent = item.title;
 
   const beschreibung = document.createElement("div");
-  beschreibung.className = "border px-2 text-sm";
+  beschreibung.className = "px-2 text-sm";
   beschreibung.textContent = item.overview;
 
   const form = document.createElement("form");
@@ -114,7 +113,7 @@ const createCard = (item, target) => {
 
   const notesBtn = document.createElement("button");
   notesBtn.className =
-    "w-20 h-8 border flex items-center justify-center text-sm";
+    "w-20 h-8 flex items-center justify-center text-sm";
   notesBtn.textContent = "Save";
 
   const notesText = document.createElement("textarea");
@@ -151,8 +150,7 @@ const createCard = (item, target) => {
 
   card.addEventListener("favoriteChanged", (event) => {
     const isFavorite = event.detail.isFavorite;
-    btnStar.classList.toggle("bg-red-500", isFavorite);
-    btnStar.classList.toggle("bg-green-500", !isFavorite);
+    btnStar.classList.toggle("favorited", isFavorite);
   });
 };
 
