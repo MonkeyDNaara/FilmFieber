@@ -7,6 +7,26 @@ const options = {
   headers: { accept: "application/json", Authorization: `Bearer ${API_TOKEN}` },
 };
 
+const fetchSingleMovie = async (id) => {
+  try {
+    const response = await fetch(
+      `${API_URL}movie/${id}?language=${LANGUAGE}`,
+      options,
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Fehler bei laden von Seite ${id}. Status: ${response.status}`,
+      );
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error(error.message);
+    return;
+  }
+};
+
 const fetchMovies = async (page) => {
   try {
     const response = await fetch(
@@ -48,4 +68,4 @@ const fetchSearchQuery = async (query, page) => {
 };
 
 // Exports
-export { fetchMovies, fetchSearchQuery };
+export { fetchMovies, fetchSearchQuery, fetchSingleMovie };
