@@ -1,11 +1,18 @@
 // Imports
-import { fetchMovies, fetchSearchQuery } from "./modules/fetch.js";
+import {
+  fetchMovies,
+  fetchSingleMovie,
+  fetchSearchQuery,
+} from "./modules/fetch.js";
 import { saveData } from "./modules/storage.js";
 import { createCard } from "./modules/ui.js";
 
 // DOM-Elemente auslesen
 const cardContainer = document.querySelector("#card_container");
 const moreButton = document.querySelector("#show_more_button");
+const recoContainer = document.querySelector("#recommendations");
+const searchField = document.getElementById("search");
+const searchResultContainer = document.getElementById("searchresults");
 
 // Funktionen
 // Show more Function
@@ -28,6 +35,16 @@ const showMorePages = (event) => {
 };
 
 moreButton.addEventListener("click", showMorePages);
+
+// Recommendations
+const recoMovies = [
+  { title: "The Blind Side", id: "22881" },
+  { title: "Christophers langweiliger Film :P", id: "969681" },
+];
+
+recoMovies.forEach(async (recos) => {
+  createCard(await fetchSingleMovie(recos.id), recoContainer);
+});
 
 // Search
 const showSearchResults = async (query, container) => {
