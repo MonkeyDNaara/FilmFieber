@@ -149,7 +149,8 @@ const createCard = (item, target) => {
   });
 
   card.addEventListener("favoriteChanged", (event) => {
-    btnStar.classList.toggle("favorited", event.detail.isFavorite);
+    const isFavorite = event.detail.isFavorite;
+    btnStar.classList.toggle("favorited", isFavorite);
   });
 };
 
