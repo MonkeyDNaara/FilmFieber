@@ -131,6 +131,13 @@
     .flex.self-end > :nth-child(2):active {
       transform: scale(0.9) !important;
     }
+    /* Stern ist favorisiert = leuchtendes weiß-gold */
+    .flex.self-end > :nth-child(2).favorited {
+      color: #fff9c4 !important;
+      filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.8))
+        drop-shadow(0 0 14px rgba(255, 215, 0, 0.5))
+        drop-shadow(0 0 24px rgba(255, 215, 0, 0.25)) !important;
+    }
   }
   .header-glass {
     background: linear-gradient(

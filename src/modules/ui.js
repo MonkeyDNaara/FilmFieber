@@ -67,8 +67,7 @@ const createCard = (item, target) => {
   btnStar.textContent = "★";
 
   const isInStorage = isItemInStorage(item.id);
-  btnStar.classList.toggle("bg-red-500", isInStorage);
-  btnStar.classList.toggle("bg-green-500", !isInStorage);
+  btnStar.classList.toggle("favorited", isInStorage);
 
   btnStar.addEventListener("click", (event) => {
     handleFavorite(event, item);
@@ -150,9 +149,7 @@ const createCard = (item, target) => {
   });
 
   card.addEventListener("favoriteChanged", (event) => {
-    const isFavorite = event.detail.isFavorite;
-    btnStar.classList.toggle("bg-red-500", isFavorite);
-    btnStar.classList.toggle("bg-green-500", !isFavorite);
+    btnStar.classList.toggle("favorited", event.detail.isFavorite);
   });
 };
 
