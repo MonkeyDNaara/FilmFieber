@@ -40,6 +40,7 @@ moreButton.addEventListener("click", showMorePages);
 const recoMovies = [
   { title: "The Blind Side", id: "22881" },
   { title: "Christophers langweiliger Film :P", id: "969681" },
+  { title: "The Book of Eli", id: "20504" },
 ];
 
 recoMovies.forEach(async (recos) => {

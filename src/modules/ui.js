@@ -91,18 +91,18 @@ const createCard = (item, target) => {
   content.className = "flex-1 flex flex-col";
 
   const titel = document.createElement("div");
-  titel.className = "px-2 text-md font-bold";
+  titel.className = "px-2 text-md font-bold mx-1 my-1";
   titel.textContent = item.title;
 
   const beschreibung = document.createElement("div");
-  beschreibung.className = "px-2 text-sm";
+  beschreibung.className = "px-2 text-sm mx-1 my-2";
   beschreibung.textContent = item.overview;
 
   const form = document.createElement("form");
   form.className = "hidden";
 
   const notesContainer = document.createElement("div");
-  notesContainer.className = "px-2 m-2";
+  notesContainer.className = "px-2 m-2 border border-white rounded";
 
   const notesHeader = document.createElement("div");
   notesHeader.className = "flex justify-between py-2 my-2";
@@ -113,12 +113,12 @@ const createCard = (item, target) => {
 
   const notesBtn = document.createElement("button");
   notesBtn.className =
-    "w-20 h-8 flex items-center justify-center text-sm";
+    "w-20 h-8 flex items-center justify-center text-sm border border-white rounded";
   notesBtn.textContent = "Save";
 
   const notesText = document.createElement("textarea");
   notesText.rows = "3";
-  notesText.className = "border text-sm w-full";
+  notesText.className = "border text-sm w-full rounded p-1";
   notesText.textContent = item.note ? item.note : "";
   const index = data.findIndex((element) => element.id === item.id);
   if (index !== -1) {
@@ -126,11 +126,6 @@ const createCard = (item, target) => {
   }
 
   content.appendChild(btnContainer);
-  content.appendChild(titel);
-  content.appendChild(beschreibung);
-
-  card.appendChild(imgContainer);
-  card.appendChild(content);
 
   content.appendChild(form);
   form.appendChild(notesContainer);
@@ -138,6 +133,11 @@ const createCard = (item, target) => {
   notesHeader.appendChild(notesLabel);
   notesHeader.appendChild(notesBtn);
   notesContainer.appendChild(notesText);
+  content.appendChild(titel);
+  content.appendChild(beschreibung);
+
+  card.appendChild(imgContainer);
+  card.appendChild(content);
 
   target.appendChild(card);
 
