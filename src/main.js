@@ -39,7 +39,7 @@ moreButton.addEventListener("click", showMorePages);
 // Recommendations
 const recoMovies = [
   { title: "The Blind Side", id: "22881" },
-  { title: "Christophers langweiliger Film :P", id: "969681" },
+  { title: "Christophers langweiliger Film :P", id: "120467" },
   { title: "The Book of Eli", id: "20504" },
 ];
 
@@ -120,6 +120,9 @@ modalSearchForm.addEventListener(
   async (event) => await handleSearch(event, "modal"),
 );
 modalCloseButton.addEventListener("click", closeModal);
+
+const mobileSearchButton = document.getElementById("mobileSearch");
+mobileSearchButton.addEventListener("click", openModal);
 
 // Export
 export { cardContainer, pagesShown };

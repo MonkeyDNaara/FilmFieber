@@ -12,6 +12,7 @@
   --breakpoint-sm: 10rem;
   --breakpoint-md: 60rem;
   --breakpoint-lg: 85rem;
+  --breakpoint-mobile-search: 465px;
 }
 
 @layer base {
