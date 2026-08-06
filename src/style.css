@@ -125,9 +125,9 @@
       /* Icon-Textfarbe erzwingen */
       fill: currentColor !important;
     }
-    /* Stern standardmäßig: GRAU mit GELLEM Text-Stroke */
+    /* Stern standardmäßig: UNSICHTBAR mit GELLEM Text-Stroke */
     .flex.self-end > :nth-child(2) {
-      color: #9ca3af !important;
+      color: transparent !important;
       -webkit-text-stroke: 1px #ffd700 !important;
       text-stroke: 1px #ffd700 !important;
       filter: none !important;
