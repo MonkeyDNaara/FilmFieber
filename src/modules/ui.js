@@ -102,7 +102,7 @@ const createCard = (item, target) => {
   form.className = "hidden";
 
   const notesContainer = document.createElement("div");
-  notesContainer.className = "px-2 m-2 border border-white rounded";
+  notesContainer.className = "px-2 m-2 border border-yellow-400/50 rounded";
 
   const notesHeader = document.createElement("div");
   notesHeader.className = "flex justify-between py-2 my-2";
@@ -113,12 +113,12 @@ const createCard = (item, target) => {
 
   const notesBtn = document.createElement("button");
   notesBtn.className =
-    "w-20 h-8 flex items-center justify-center text-sm border border-white rounded";
+    "w-20 h-8 flex items-center justify-center text-sm border border-yellow-400/50 rounded";
   notesBtn.textContent = "Save";
 
   const notesText = document.createElement("textarea");
   notesText.rows = "3";
-  notesText.className = "border text-sm w-full rounded p-1";
+  notesText.className = "border border-yellow-400/40 text-sm w-full rounded p-1";
   notesText.textContent = item.note ? item.note : "";
   const index = data.findIndex((element) => element.id === item.id);
   if (index !== -1) {
