@@ -9,6 +9,9 @@
   --color-brand-accent: #f5d061;
   --font-display: "Bebas Neue", sans-serif;
   --font-body: "Inter", sans-serif;
+  --breakpoint-sm: 10rem;
+  --breakpoint-md: 60rem;
+  --breakpoint-lg: 85rem;
 }
 
 @layer base {
@@ -35,7 +38,7 @@
     pointer-events: none;
     z-index: 0;
   }
-  }
+}
 
 @layer components {
   /* Gemeinsames Glass-Card Grundgerüst — DRY für .glass-card (wiederverwendbar
