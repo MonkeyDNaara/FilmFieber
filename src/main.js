@@ -9,7 +9,6 @@ import { createCard } from "./modules/ui.js";
 
 // DOM-Elemente auslesen
 const cardContainer = document.querySelector("#card_container");
-const form = document.querySelector("#search_form");
 const moreButton = document.querySelector("#show_more_button");
 const recoContainer = document.querySelector("#recommendations");
 const searchField = document.getElementById("search");
@@ -47,20 +46,79 @@ recoMovies.forEach(async (recos) => {
   createCard(await fetchSingleMovie(recos.id), recoContainer);
 });
 
-// const searchResult = await fetchSearchQuery("Interstel", 1);
-// console.log(searchResult);
-// saveData(movies.results);
-
 // Search
-
-searchField.addEventListener("search", async (event) => {
-  searchResultContainer.replaceChildren();
-  const query = encodeURIComponent(event.target.value);
-  const searchResults = await fetchSearchQuery(query, 1);
+const showSearchResults = async (query, container) => {
+  container.replaceChildren();
+  const encodedQuery = encodeURIComponent(query);
+  const searchResults = await fetchSearchQuery(encodedQuery, 1);
   searchResults.results.forEach((movie) => {
-    createCard(movie, searchResultContainer);
+    createCard(movie, container);
   });
+};
+
+const modal = document.getElementById("searchModal");
+const modalBox = document.getElementById("modalBox");
+const mainSearchInput = document.getElementById("mainSearchInput");
+const modalSearchInput = document.getElementById("modalSearchInput");
+const queryDisplay = document.getElementById("queryDisplay");
+const resultsContainer = document.getElementById("resultsContainer");
+
+const handleSearch = async (event, source) => {
+  event.preventDefault();
+
+  let query = "";
+  if (source === "main") {
+    query = mainSearchInput.value.trim();
+  } else if (source === "modal") {
+    query = modalSearchInput.value.trim();
+  }
+
+  if (query !== "") {
+    queryDisplay.textContent = query;
+    mainSearchInput.value = query;
+    modalSearchInput.value = query;
+    openModal();
+  }
+  await showSearchResults(query, resultsContainer);
+};
+
+const openModal = () => {
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  modalSearchInput.focus();
+  document.body.classList.add("overflow-hidden");
+};
+
+const closeModal = () => {
+  modal.classList.remove("flex");
+  modal.classList.add("hidden");
+  document.body.classList.remove("overflow-hidden");
+};
+
+modal.addEventListener("click", (event) => {
+  if (!modalBox.contains(event.target)) {
+    closeModal();
+  }
 });
 
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeModal();
+  }
+});
+
+const searchForm = document.getElementById("searchForm");
+const modalSearchForm = document.getElementById("modalSearchForm");
+const modalCloseButton = document.getElementById("modalCloseButton");
+searchForm.addEventListener(
+  "submit",
+  async (event) => await handleSearch(event, "main"),
+);
+modalSearchForm.addEventListener(
+  "submit",
+  async (event) => await handleSearch(event, "modal"),
+);
+modalCloseButton.addEventListener("click", closeModal);
+
 // Export
-export { cardContainer, form, pagesShown };
+export { cardContainer, pagesShown };

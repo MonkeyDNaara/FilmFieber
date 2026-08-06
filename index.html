@@ -30,6 +30,41 @@
           </svg>
           <span class="font-display text-xl gold-title">FilmFieber</span>
         </a>
+        <!-- START SEARCH BAR -->
+        <search>
+          <div class="w-full max-w-md px-4">
+            <form
+              id="searchForm"
+              class="flex items-center bg-transparent px-4 py-3 rounded-xl shadow-md border border-brand-purple focus-within:border-brand-accent"
+            >
+              <button
+                type="submit"
+                class="text-slate-400 hover:text-white mr-3 focus:outline-none"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  ></path>
+                </svg>
+              </button>
+              <input
+                type="search"
+                id="mainSearchInput"
+                placeholder="Search"
+                class="w-full bg-transparent text-white placeholder-slate-400 focus:outline-none text-lg"
+              />
+            </form>
+          </div>
+        </search>
+        <!-- END SERACH BAR -->
         <nav class="flex gap-2">
           <a
             href="/"
@@ -52,15 +87,6 @@
           id="recommendations"
           class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 justify-items-center"
         ></div>
-        <search>
-          <input
-            class="bg-amber-500 px-4 py-2 rounded"
-            type="search"
-            name="search"
-            id="search"
-          />
-          <div id="searchresults" class="bg-amber-500"></div>
-        </search>
         <div
           id="card_container"
           class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 justify-items-center"
@@ -78,5 +104,68 @@
         </div>
       </div>
     </main>
+    <!-- START SEARCH MODAL -->
+    <div
+      id="searchModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden justify-center pt-20 px-4 z-50"
+    >
+      <div
+        id="modalBox"
+        class="bg-[#05030a] w-full max-h-[85vh] flex flex-col rounded-xl shadow-2xl border border-slate-200"
+      >
+        <form
+          id="modalSearchForm"
+          class="flex items-center px-4 py-3 border-b border-slate-200 shrink-0"
+        >
+          <button
+            type="submit"
+            class="text-slate-400 hover:text-white mr-3 focus:outline-none"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              ></path>
+            </svg>
+          </button>
+          <input
+            type="search"
+            id="modalSearchInput"
+            placeholder="Search"
+            class="w-full max-w-md bg-transparent text-white placeholder-slate-400 focus:outline-none text-lg border border-brand-purple focus-within:border-brand-accent px-4 py-3 rounded-xl"
+          />
+          <button
+            type="button"
+            id="modalCloseButton"
+            class="ml-auto text-slate-400 hover:text-white text-sm px-2 py-1 bg-brand-purple rounded"
+          >
+            ESC
+          </button>
+        </form>
+        <div
+          id="searchResults"
+          class="flex-1 min-h-0 p-4 space-y-2 flex flex-col"
+        >
+          <div
+            class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 shrink-0"
+          >
+            Search Results for:
+            <span id="queryDisplay" class="text-white"></span>
+          </div>
+          <div
+            id="resultsContainer"
+            class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 justify-items-center flex-1 min-h-0 overflow-y-auto pr-2"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <!-- END SEARCH MODAL -->
   </body>
 </html>
