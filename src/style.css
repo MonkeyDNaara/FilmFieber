@@ -115,7 +115,6 @@
       background: transparent !important;
       border: none !important;
       border-radius: 9999px !important;
-      color: #ffd700 !important;
       font-size: 1.1rem !important;
       font-weight: 700 !important;
       line-height: 1 !important;
@@ -126,20 +125,23 @@
       /* Icon-Textfarbe erzwingen */
       fill: currentColor !important;
     }
-    .flex.self-end > :nth-child(1):hover,
-    .flex.self-end > :nth-child(2):hover {
+    /* Stern standardmäßig: GRAU mit GELLEM Text-Stroke */
+    .flex.self-end > :nth-child(2) {
+      color: #9ca3af !important;
+      -webkit-text-stroke: 1px #ffd700 !important;
+      text-stroke: 1px #ffd700 !important;
+      filter: none !important;
+    }
+    /* Notizen-Button hover: hell-gold */
+    .flex.self-end > :nth-child(1):hover {
       color: #fff6c2 !important;
       filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)) !important;
     }
-    .flex.self-end > :nth-child(1):active,
-    .flex.self-end > :nth-child(2):active {
-      transform: scale(0.9) !important;
-    }
-    /* Stern ist favorisiert = leuchtendes weiß-gold + grauer, eckiger Hintergrund */
+    /* Stern favorisiert = leuchtendes weiß-gold OHNE Text-Stroke, mit Glow */
     .flex.self-end > :nth-child(2).favorited {
       color: #fff9c4 !important;
-      background: #4b5563 !important;
-      border-radius: 0.375rem !important;
+      -webkit-text-stroke: 0 !important;
+      text-stroke: 0 !important;
       filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.8))
         drop-shadow(0 0 14px rgba(255, 215, 0, 0.5))
         drop-shadow(0 0 24px rgba(255, 215, 0, 0.25)) !important;
