@@ -91,11 +91,20 @@ const createCard = (item, target) => {
   content.className = "flex-1 flex flex-col";
 
   const titel = document.createElement("div");
-  titel.className = "px-2 text-md font-bold mx-1 my-1";
+  titel.className = "px-2 text-md mx-1 my-1 text-lg font-sans font-bold";
   titel.textContent = item.title;
 
+  const tagsContainer = document.createElement("div");
+  tagsContainer.className =
+    "flex items-center gap-2 mt-1 px-3 text-xs text-white/50 font-medium";
+
+  const yearSpan = document.createElement("span");
+  yearSpan.textContent = item.release_date.slice(0, 4);
+
+  tagsContainer.appendChild(yearSpan);
+
   const beschreibung = document.createElement("div");
-  beschreibung.className = "px-2 text-sm mx-1 my-2";
+  beschreibung.className = "px-2 text-sm mx-1 my-2 font-sans font-extralight";
   beschreibung.textContent = item.overview;
 
   const form = document.createElement("form");
@@ -135,6 +144,7 @@ const createCard = (item, target) => {
   notesHeader.appendChild(notesBtn);
   notesContainer.appendChild(notesText);
   content.appendChild(titel);
+  content.appendChild(tagsContainer);
   content.appendChild(beschreibung);
 
   card.appendChild(imgContainer);
