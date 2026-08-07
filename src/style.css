@@ -12,6 +12,8 @@
   --breakpoint-sm: 10rem;
   --breakpoint-md: 60rem;
   --breakpoint-lg: 85rem;
+  --breakpoint-2xl: 160rem;
+  --breakpoint-mobile-search: 465px;
 }
 
 @layer base {
@@ -62,6 +64,7 @@
     display: flex !important;
     flex-direction: row !important;
     aspect-ratio: 16 / 9;
+    width: min(100%, 25rem);
     min-width: 0;
     /* !important am Ende der Shadow-Liste (gültige Syntax für die ganze Liste),
        damit Tailwind .shadow-md/.shadow-white aus ui.js nicht überschreiben. */
@@ -73,7 +76,8 @@
 
     /* Poster-Container links: fester Breite, Bild füllt ihn */
     & > div[class*="w-32"] {
-      flex: 0 0 32w; /* ~128px */
+      flex: 0 0 8rem;
+      width: 8rem;
       overflow: hidden;
       min-width: 128px;
     }
@@ -147,6 +151,34 @@
         drop-shadow(0 0 24px rgba(255, 215, 0, 0.25)) !important;
     }
   }
+
+  @media (max-width: 27rem) {
+    .moviecard.film-card {
+      flex-direction: column !important;
+      width: min(100%, 24rem);
+      aspect-ratio: auto;
+    }
+
+    .moviecard.film-card > div[class*="w-32"] {
+      flex: 0 0 auto;
+      width: 100%;
+      min-width: 0;
+      aspect-ratio: auto;
+    }
+
+    .moviecard.film-card > div[class*="w-32"] img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .moviecard.film-card > div[class*="flex-1"] {
+      max-height: none;
+      overflow: visible;
+    }
+  }
+
   .header-glass {
     background: linear-gradient(
       180deg,
