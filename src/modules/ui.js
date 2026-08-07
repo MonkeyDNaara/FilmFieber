@@ -105,15 +105,15 @@ const createCard = (item, target) => {
   notesContainer.className = "px-2 m-2 border border-yellow-400/50 rounded";
 
   const notesHeader = document.createElement("div");
-  notesHeader.className = "flex justify-between py-2 my-2";
+  notesHeader.className = "flex justify-between py-2 my-2 items-center";
 
   const notesLabel = document.createElement("Label");
   notesLabel.textContent = "Notes";
-  notesLabel.className = "block text-md font-bold";
+  notesLabel.className = "block text-md font-bold ml-2";
 
   const notesBtn = document.createElement("button");
   notesBtn.className =
-    "w-20 h-8 flex items-center justify-center text-sm border border-yellow-400/50 rounded";
+    "w-18 h-8 flex items-center justify-center text-sm border border-yellow-400/50 rounded cursor-pointer hover:bg-yellow-400/5 hover:scale-102 mr-1 p-1";
   notesBtn.textContent = "Save";
 
   const notesText = document.createElement("textarea");
