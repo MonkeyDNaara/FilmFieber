@@ -6,6 +6,8 @@ FilmFieber lets you explore popular movies from [The Movie Database (TMDB)](http
 
 _This was made as a learning project with focus on vanilla Javascript and Web APIs like DOM, Web Storage and Fetch._
 
+Demo: https://filmfieber.onrender.com/
+
 ## Features
 
 - **Browse Popular Movies** — Fetches and displays popular movies from the TMDB API on the homepage.
