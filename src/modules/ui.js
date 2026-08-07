@@ -53,7 +53,7 @@ const createCard = (item, target) => {
   const card = document.createElement("div");
   const data = getData();
   card.className =
-    "moviecard film-card w-100 flex mx-2 my-3 rounded shadow-md shadow-white";
+    "moviecard film-card flex mx-2 my-3 rounded shadow-md shadow-white";
 
   const btnContainer = document.createElement("div");
   btnContainer.className = "flex self-end";
@@ -118,7 +118,8 @@ const createCard = (item, target) => {
 
   const notesText = document.createElement("textarea");
   notesText.rows = "3";
-  notesText.className = "border border-yellow-400/40 text-sm w-full rounded p-1";
+  notesText.className =
+    "border border-yellow-400/40 text-sm w-full rounded p-1";
   notesText.textContent = item.note ? item.note : "";
   const index = data.findIndex((element) => element.id === item.id);
   if (index !== -1) {
